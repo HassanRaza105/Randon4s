@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Roll Number Groups</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .group { margin: 10px; padding: 10px; border: 1px solid #000; display: inline-block; }
+        button { margin-top: 20px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Random Roll Number Groups</h2>
+    <div id="groups"></div>
+    <button onclick="generateGroups()">Generate New Groups</button><script>
+    function generateGroups() {
+        const allRollNumbers = Array.from({length: 34}, (_, i) => i + 1).filter(n => n !== 18 && n !== 33);
+        const shuffled = allRollNumbers.sort(() => 0.5 - Math.random());
+        const groups = [];
+        
+        for (let i = 0; i < 8; i++) {
+            groups.push(shuffled.slice(i * 4, i * 4 + 4));
+        }
+        
+        document.getElementById('groups').innerHTML = groups.map((group, index) => 
+            `<div class="group"><strong>Group ${index + 1}:</strong> ${group.join(', ')}</div>`
+        ).join('');
+    }
+    
+    generateGroups();
+</script>
+
+</body>
+</html>
